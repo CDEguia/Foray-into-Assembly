@@ -1,20 +1,39 @@
 #pragma once
+using namespace std;
+
+void display(int a0, int b0, int c0, char s0[]) {
+	cout << dec << a0 << s0 << b0 << " = " << c0 << endl;
+}
 
 void add_sub() {
-	int a, b, c;
+	int a, b, c, d, e;
 	system("cls");
-	std::cout << "---------- Addition and Subtraction ----------\n";
+	cout << "---------- Addition and Subtraction ----------\n";
 	_asm {
 		mov a, 12
-		mov b, 17
+		mov b, 15
 
-		////compute c = a+b
-		mov eax, a //place a into eax
-		add eax, b //place eax+b into eax
-		mov c, eax //place eax into c
+		; compute c = a + b
+		mov eax, a; place a into eax
+		add eax, b; place eax + b into eax
+		mov c, eax; place eax into c
 	}
+	cout << "_asm\t\tcomment\n";
+	cout << "mov a, 12\tplace 12 into a\n";
+	cout << "mov eax, a\tplace a into eax\n";
+	cout << "add eax, b\tplace eax + b back into eax\n";
+	cout << "mov c, eax\tplace eax into c" << endl;
+	display(a, b, c, " + ");
 
-	std::cout << a << " + " << b << " = " << c << std::endl;
+	cout << "Enter two positive integers: ";
+	cin >> d >> e;
+	
+	_asm {
+		mov eax, d; place d into eax
+		add eax, e; place eax + e into eax
+		mov c, eax; place eax into c
+	}
+	display(d, e, c, " + ");
 
 	_asm {
 		//compute c = a-b
@@ -22,7 +41,7 @@ void add_sub() {
 		sub ebx, b //place ebx-b into ebx
 		mov c, ebx //place ebx into c
 	}
-	std::cout << a << " - " << b << " = " << c << std::endl;
+	display(a, b, c, " - ");
 
 	_asm {
 		//compute c = -a + b
@@ -32,7 +51,17 @@ void add_sub() {
 		add eax, b //place -eax + b into eax
 		mov c, eax
 	}
-	std::cout << a << " + " << b << " = " << c << std::endl;
+	display(a, b, c, " + ");
+
+	_asm {
+		//compute c = -a - b
+		mov eax, a
+		neg eax //convert eax into a negetive number
+		mov a, eax //place -eax into a
+		sub eax, b //place -eax + b into eax
+		mov c, eax
+	}
+	display(a, b, c, " - ");
 
 	system("pause");
 }

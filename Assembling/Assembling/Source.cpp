@@ -1,7 +1,8 @@
 #include <iostream>
 #include "Add_Sub.h"
-
+#include "Assignment.h"
 using namespace std;
+
 
 int main() {
 	bool again = true;
@@ -9,8 +10,9 @@ int main() {
 	while (again) {
 		system("cls");
 		cout << "---------- MENU ----------\n";
-		cout << "\t1. Adding and subtracting\n";
-		cout << "\t0. Exit\n";
+		cout << "1. Assigning Values\n";
+		cout << "2. Adding and subtracting\n";
+		cout << "0. Exit\n";
 		cout << "Enter a number: ";
 		cin >> menuChoice;
 
@@ -24,6 +26,9 @@ int main() {
 			}
 			break;
 		case 1:
+			assignment();
+			break;
+		case 2:
 			add_sub();
 			break;
 		default:
