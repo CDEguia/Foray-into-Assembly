@@ -2,6 +2,8 @@
 #include "Add_Sub.h"
 #include "Assignment.h"
 #include "Perimeter.h"
+#include "CommandsAndMore.h"
+#include "Multiply_Divide.h"
 using namespace std;
 
 
@@ -16,6 +18,7 @@ int main() {
 		cout << "2. Assigning Values\n";
 		cout << "3. Adding and subtracting\n";
 		cout << "\t4. Perimeter example\n";
+		cout << "5. Multiply and Divide\n";
 		cout << "0. Exit\n";
 		cout << "Enter a choice: ";
 		cin >> menuChoice;
@@ -30,7 +33,7 @@ int main() {
 			}
 			break;
 		case '1':
-			//genralNotation();
+			commandsAndMore();
 			break;
 		case '2':
 			assignment();
@@ -40,6 +43,9 @@ int main() {
 			break;
 		case '4':
 			perimeter();
+			break;
+		case '5':
+			multiDiv();
 			break;
 		default:
 			cout << "\nChoice not found.\n\n";
