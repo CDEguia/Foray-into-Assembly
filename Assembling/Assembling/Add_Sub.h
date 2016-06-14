@@ -19,10 +19,10 @@ void add_sub() {
 		mov c, eax; place eax into c
 	}
 	cout << "_asm\t\tcomment\n";
-	cout << "mov a, 12\tplace 12 into a\n";
-	cout << "mov eax, a\tplace a into eax\n";
-	cout << "add eax, b\tplace eax + b back into eax\n";
-	cout << "mov c, eax\tplace eax into c" << endl;
+	cout << "mov a, 12\t; a = 12\n";
+	cout << "mov eax, a\t; eax = the contents of: a\n";
+	cout << "add eax, b\t; eax = eax + b\n";
+	cout << "mov c, eax\t; c = the contents of: eax" << endl;
 	display(a, b, c, " + ");
 
 	cout << "Enter two positive integers: ";
