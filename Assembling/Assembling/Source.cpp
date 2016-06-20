@@ -5,6 +5,7 @@
 #include "CommandsAndMore.h"
 #include "Multiply_Divide.h"
 #include "MenuOrder.h"
+#include "theTriangle.h"
 
 using namespace std;
 
@@ -22,6 +23,7 @@ int main() {
 		cout << "\t4. Perimeter example\n";
 		cout << "5. Multiply and Divide\n";
 		cout << "6. Menu Ordering\n";
+		cout << "7. Triangle(Division)\n";
 		cout << "0. Exit\n";
 		cout << "Enter a choice: ";
 		cin >> menuChoice;
@@ -52,6 +54,9 @@ int main() {
 			break;
 		case '6':
 			Menu();
+			break;
+		case '7':
+			triangle();
 			break;
 		default:
 			cout << "\nChoice not found.\n\n";

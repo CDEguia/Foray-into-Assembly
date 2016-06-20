@@ -36,6 +36,9 @@
     <ClInclude Include="MenuOrder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="theTriangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
