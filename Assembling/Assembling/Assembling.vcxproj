@@ -117,6 +117,7 @@
     <ClInclude Include="Multiply_Divide.h" />
     <ClInclude Include="Perimeter.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="theTriangle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
