@@ -112,6 +112,7 @@
   <ItemGroup>
     <ClInclude Include="Add_Sub.h" />
     <ClInclude Include="Assignment.h" />
+    <ClInclude Include="Bitwise.h" />
     <ClInclude Include="CommandsAndMore.h" />
     <ClInclude Include="MenuOrder.h" />
     <ClInclude Include="Multiply_Divide.h" />
