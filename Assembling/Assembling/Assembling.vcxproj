@@ -112,6 +112,8 @@
   <ItemGroup>
     <ClInclude Include="Add_Sub.h" />
     <ClInclude Include="Assignment.h" />
+    <ClInclude Include="Bianary.h" />
+    <ClInclude Include="Binary_ASM.h" />
     <ClInclude Include="Bitwise.h" />
     <ClInclude Include="CommandsAndMore.h" />
     <ClInclude Include="MenuOrder.h" />

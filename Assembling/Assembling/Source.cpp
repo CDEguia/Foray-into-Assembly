@@ -6,7 +6,9 @@
 #include "Multiply_Divide.h"
 #include "MenuOrder.h"
 #include "theTriangle.h"
-
+#include "Bitwise.h"
+#include "Bianary.h"
+#include "Binary_ASM.h"
 
 using namespace std;
 
@@ -18,18 +20,21 @@ int main() {
 		char menuChoice;
 		system("cls");
 		cout << "---------- MENU ----------\n";
-		cout << "1. Genral notation and commands\n";
-		cout << "2. Assigning Values\n";
-		cout << "3. Adding and subtracting\n";
-		cout << "\t4. Perimeter example\n";
-		cout << "5. Multiply and Divide\n";
-		cout << "6. Menu Ordering\n";
-		cout << "7. Triangle(Division)\n";
+		cout << "A. Genral notation and commands\n";
+		cout << "B. Assigning Values\n";
+		cout << "C. Adding and subtracting\n";
+		cout << "D. Perimeter example\n";
+		cout << "E. Multiply and Divide\n";
+		cout << "F. Menu Ordering\n";
+		cout << "G. Triangle(Division)\n";
+		cout << "H. Bitwise Opperators\n";
+		cout << "I. Binary output\n";
+		cout << "J. Binary output using Assembly(\"mostly\")\n";
 		cout << "0. Exit\n";
 		cout << "Enter a choice: ";
 		cin >> menuChoice;
 
-		switch (menuChoice)
+		switch (toupper(menuChoice))
 		{
 		case '0':
 			cin.ignore();
@@ -38,26 +43,35 @@ int main() {
 				again = false;
 			}
 			break;
-		case '1':
+		case 'A':
 			commandsAndMore();
 			break;
-		case '2':
+		case 'B':
 			assignment();
 			break;
-		case '3':
+		case 'C':
 			add_sub();
 			break;
-		case '4':
+		case 'D':
 			perimeter();
 			break;
-		case '5':
+		case 'E':
 			multiDiv();
 			break;
-		case '6':
+		case 'F':
 			Menu();
 			break;
-		case '7':
+		case 'G':
 			triangle();
+			break;
+		case 'H':
+			bitwise();
+			break;
+		case 'I':
+			binary();
+			break;
+		case 'J':
+			binary_asm();
 			break;
 		default:
 			cout << "\nChoice not found.\n\n";

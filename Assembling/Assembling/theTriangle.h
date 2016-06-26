@@ -24,7 +24,7 @@ using namespace std;
 void triangle() {
 	system("cls");
 	cout << "---------- Division ---------\n\n";
-	int h, b, area, perim;
+	int h, b, area;
 	cout << "\t     ^\n";
 	cout << "\t    / \\\n";
 	cout << "\t   / | \\ h\n";
