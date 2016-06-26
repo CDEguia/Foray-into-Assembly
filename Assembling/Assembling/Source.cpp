@@ -19,20 +19,21 @@ int main() {
 		char menuChoice;
 		system("cls");
 		cout << "---------- MENU ----------\n";
-		cout << "1. Genral notation and commands\n";
-		cout << "2. Assigning Values\n";
-		cout << "3. Adding and subtracting\n";
-		cout << "\t4. Perimeter example\n";
-		cout << "5. Multiply and Divide\n";
-		cout << "6. Menu Ordering\n";
-		cout << "7. Triangle(Division)\n";
-		cout << "8. Bitwise Opperators\n";
-		cout << "9. Bianary output\n";
+		cout << "A. Genral notation and commands\n";
+		cout << "B. Assigning Values\n";
+		cout << "C. Adding and subtracting\n";
+		cout << "D. Perimeter example\n";
+		cout << "E. Multiply and Divide\n";
+		cout << "F. Menu Ordering\n";
+		cout << "G. Triangle(Division)\n";
+		cout << "H. Bitwise Opperators\n";
+		cout << "I. Binary output\n";
+		cout << "J. Binary output using Assembly(\"mostly\")\n";
 		cout << "0. Exit\n";
 		cout << "Enter a choice: ";
 		cin >> menuChoice;
 
-		switch (menuChoice)
+		switch (toupper(menuChoice))
 		{
 		case '0':
 			cin.ignore();
@@ -66,7 +67,7 @@ int main() {
 			bitwise();
 			break;
 		case '9':
-			bianary();
+			binary();
 			break;
 		default:
 			cout << "\nChoice not found.\n\n";

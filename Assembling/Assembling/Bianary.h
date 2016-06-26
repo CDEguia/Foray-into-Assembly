@@ -7,7 +7,7 @@
 //		Professor	Ray Ahmadnia
 //
 //   This program displays:
-//		Int into Bianary using C++
+//		Int into Binary using C++
 //----------------------------------------------------------
 using namespace std;
 
@@ -23,7 +23,7 @@ void intBase2(unsigned int n) {
 	cout << endl;
 }
 
-void bianary() {
+void binary() {
 	system("cls");
 	cout << "---------- Bianary ---------\n\n";
 	cout << "\tOutput in bianary using bitwise opperators:\n\n";
