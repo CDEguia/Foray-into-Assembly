@@ -6,7 +6,7 @@
 #include "Multiply_Divide.h"
 #include "MenuOrder.h"
 #include "theTriangle.h"
-
+#include "Bitwise.h"
 
 using namespace std;
 
@@ -25,6 +25,7 @@ int main() {
 		cout << "5. Multiply and Divide\n";
 		cout << "6. Menu Ordering\n";
 		cout << "7. Triangle(Division)\n";
+		cout << "8. Bitwise Opperators\n";
 		cout << "0. Exit\n";
 		cout << "Enter a choice: ";
 		cin >> menuChoice;
@@ -58,6 +59,9 @@ int main() {
 			break;
 		case '7':
 			triangle();
+			break;
+		case '8':
+			bitwise();
 			break;
 		default:
 			cout << "\nChoice not found.\n\n";
