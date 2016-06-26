@@ -8,6 +8,7 @@
 #include "theTriangle.h"
 #include "Bitwise.h"
 #include "Bianary.h"
+#include "Binary_ASM.h"
 
 using namespace std;
 
@@ -42,32 +43,35 @@ int main() {
 				again = false;
 			}
 			break;
-		case '1':
+		case 'A':
 			commandsAndMore();
 			break;
-		case '2':
+		case 'B':
 			assignment();
 			break;
-		case '3':
+		case 'C':
 			add_sub();
 			break;
-		case '4':
+		case 'D':
 			perimeter();
 			break;
-		case '5':
+		case 'E':
 			multiDiv();
 			break;
-		case '6':
+		case 'F':
 			Menu();
 			break;
-		case '7':
+		case 'G':
 			triangle();
 			break;
-		case '8':
+		case 'H':
 			bitwise();
 			break;
-		case '9':
+		case 'I':
 			binary();
+			break;
+		case 'J':
+			binary_asm();
 			break;
 		default:
 			cout << "\nChoice not found.\n\n";
