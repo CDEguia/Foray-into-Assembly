@@ -9,6 +9,7 @@
 #include "Bitwise.h"
 #include "Bianary.h"
 #include "Binary_ASM.h"
+#include "Making_Decisions.h"
 
 using namespace std;
 
@@ -30,6 +31,7 @@ int main() {
 		cout << "H. Bitwise Opperators\n";
 		cout << "I. Binary output\n";
 		cout << "J. Binary output using Assembly(\"mostly\")\n";
+		cout << "K. Making Decisions\n";
 		cout << "0. Exit\n";
 		cout << "Enter a choice: ";
 		cin >> menuChoice;
@@ -72,6 +74,9 @@ int main() {
 			break;
 		case 'J':
 			binary_asm();
+			break;
+		case 'K':
+			decision();
 			break;
 		default:
 			cout << "\nChoice not found.\n\n";
