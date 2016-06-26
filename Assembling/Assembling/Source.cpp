@@ -7,6 +7,7 @@
 #include "MenuOrder.h"
 #include "theTriangle.h"
 #include "Bitwise.h"
+#include "Bianary.h"
 
 using namespace std;
 
@@ -26,6 +27,7 @@ int main() {
 		cout << "6. Menu Ordering\n";
 		cout << "7. Triangle(Division)\n";
 		cout << "8. Bitwise Opperators\n";
+		cout << "9. Bianary output\n";
 		cout << "0. Exit\n";
 		cout << "Enter a choice: ";
 		cin >> menuChoice;
@@ -62,6 +64,9 @@ int main() {
 			break;
 		case '8':
 			bitwise();
+			break;
+		case '9':
+			bianary();
 			break;
 		default:
 			cout << "\nChoice not found.\n\n";
