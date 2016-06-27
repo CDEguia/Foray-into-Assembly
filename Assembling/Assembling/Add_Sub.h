@@ -25,8 +25,19 @@ void add_sub() {
 	cout << "mov c, eax\t; c = the contents of: eax" << endl;
 	display(a, b, c, " + ");
 
-	cout << "Enter two positive integers: ";
-	cin >> d >> e;
+	//cout << "Enter two positive integers (i.e.: 1 3 ): ";
+	//cin >> d >> e;
+	bool again;
+	do {
+		again = false;
+		cout << "Enter two positive integers (i.e.: 1 3 ): ";
+		if (!(cin >> d >> e)) {
+			cin.clear();
+			cin.ignore(256, '\n');
+			cout << "Sorry I didn't recognize that.\n";
+			again = true;
+		}
+	} while (again);
 	
 	_asm {
 		mov eax, d; place d into eax

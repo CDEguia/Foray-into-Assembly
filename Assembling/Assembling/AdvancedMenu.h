@@ -17,7 +17,17 @@ short DriNum, DinNum;
 char DriKind, DinKind, ans;
 
 void AskDrinks(){
-cout << "\t\tHow many drinks would you all like? "; cin >> DriNum;
+	bool again;
+	do {
+		again = false;
+		cout << "\t\tHow many drinks would you all like? ";
+		if (!(cin >> DriNum)) {
+			cin.clear();
+			cin.ignore(256, '\n');
+			cout << "Bad Input, Please re-enter\n";
+			again = true;
+		}
+	} while (again);
 }
 void AskDrinkKind(){
 cout << "\t\tWhat kind of drink(s/w/b)? "; cin >> DriKind;
@@ -35,7 +45,17 @@ void DontHave() {
 	cout << "\tSorry we don't have that...\n";
 }
 void AskDinners() {
-	cout << "\t\tHow many drinks? "; cin >> DinNum;
+	bool again;
+	do {
+		again = false;
+		cout << "\t\tHow many dinners would you all like? ";
+		if (!(cin >> DinNum)) {
+			cin.clear();
+			cin.ignore(256, '\n');
+			cout << "Sorry I didn't recognize that.\n";
+			again = true;
+		}
+	} while (again);
 }
 void AskDinnerKind() {
 	cout << "\t\tWhat kind of drink(t/r/p)? "; cin >> DinKind;
