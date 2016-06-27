@@ -10,6 +10,7 @@
 #include "Bianary.h"
 #include "Binary_ASM.h"
 #include "Making_Decisions.h"
+#include "AdvancedMenu.h"
 
 using namespace std;
 
@@ -32,6 +33,7 @@ int main() {
 		cout << "I. Binary output\n";
 		cout << "J. Binary output using Assembly(\"mostly\")\n";
 		cout << "K. Making Decisions\n";
+		cout << "L. Advanced Menu\n";
 		cout << "0. Exit\n";
 		cout << "Enter a choice: ";
 		cin >> menuChoice;
@@ -77,6 +79,9 @@ int main() {
 			break;
 		case 'K':
 			decision();
+			break;
+		case 'L':
+			advancedMenu();
 			break;
 		default:
 			cout << "\nChoice not found.\n\n";
