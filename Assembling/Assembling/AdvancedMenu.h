@@ -24,7 +24,7 @@ void AskDrinks(){
 		if (!(cin >> DriNum)) {
 			cin.clear();
 			cin.ignore(256, '\n');
-			cout << "Bad Input, Please re-enter\n";
+			cout << "Sorry I didn't recognize that.\n";
 			again = true;
 		}
 	} while (again);
@@ -40,6 +40,15 @@ void GiveBeer() {
 }
 void GiveSoda() {
 	cout << "\tOne SODA coming up...\n";
+}
+void GiveTurkey() {
+	cout << "\tOne TURKEY DINNER coming up...\n";
+}
+void GiveRoast() {
+	cout << "\tOne ROAST BEEF DINNER coming up...\n";
+}
+void GivePrime() {
+	cout << "\tOne PRIME RIB DINNER coming up...\n";
 }
 void DontHave() {
 	cout << "\tSorry we don't have that...\n";
@@ -58,7 +67,7 @@ void AskDinners() {
 	} while (again);
 }
 void AskDinnerKind() {
-	cout << "\t\tWhat kind of drink(t/r/p)? "; cin >> DinKind;
+	cout << "\t\tWhat kind of dinner(t/r/p)? "; cin >> DinKind;
 }
 void displayTotal(){
 cout << showpoint << fixed << setprecision(2);
@@ -84,6 +93,10 @@ void menu() { //Display menu
 }
 void ConDrink() {
 	cout << "Are you sure no one wants a drink (y/n)? ";
+	cin >> ans;
+}
+void ConDinner() {
+	cout << "Are you sure no one wants dinner (y/n)? ";
 	cin >> ans;
 }
 
@@ -170,17 +183,88 @@ void advancedMenu()
 			done:
 				call displayTotal;
 		Dinners:;
+				call AskDinners;
+
+				cmp DinNum, 0;
+				Je ConfirmDinner;
+				Jmp GetDinners;
+
+			ConfirmDinner:;
+				call ConDinner;
+				cmp ans, 'y';
+				Jne TestForYD;
+				Jmp Total;
+			TestForYD:;
+				cmp ans, 'Y';
+				Jne Dinners;
+				Jmp Total;
+			GetDinners:;
+				mov i, 1;
+				forLoopD:
+					mov cx, DinNum;
+					cmp i, cx;
+					Jg Total;
+
+					call AskDinnerKind;
+
+					cmp DinKind, 't';
+					jne testForTRP;
+					//compute soda price
+					Jmp TurkeyCost;
+
+					testForTRP:;
+						cmp DinKind, 'T';
+						Jne testForRP;
+						//compute soda price
+						Jmp TurkeyCost;
+
+					testForRP:;
+						cmp DinKind, 'r';
+						Jne testForR;
+						Jmp RoastCost;
+
+					testForR:;
+						cmp DinKind, 'R';
+						Jne testPrime;
+						Jmp RoastCost;
+
+					testPrime:;
+						cmp DinKind, 'p';
+						Jne testForP;
+						Jmp PrimeCost;
+					testForP:;
+						cmp DinKind, 'P';
+						Jne NotFoundD;
+
+					PrimeCost:;
+						mov dx, PRIME_PRICE
+						add BillTotal, dx;
+						call GivePrime;
+						Jmp BottomOfLoopD;
+					RoastCost:;
+						mov dx, ROAST_PRICE;
+						add BillTotal, dx;
+						call GiveRoast;
+						Jmp BottomOfLoopD;
+					TurkeyCost:;
+						mov dx, TURKEY_PRICE;
+						add BillTotal, dx;
+						call GiveTurkey;
+						Jmp BottomOfLoopD;
+					NotFoundD:;
+						call DontHave;
+						Jmp forLoopD;
+
+					BottomOfLoopD:
+						inc i;
+						Jmp forLoopD;
+		Total:
+			call displayTotal;
 	}
 
 	//terminate program
 	system("pause");
 }
 /*--------------------Output----------------------------------------------------------
--------- K Store menu -------
-1. Drink....................2
-2. Chips....................1
-How many drinks? 35
-How many chips? 2
-Your total bill is 72
-Press any key to continue . . .
+
 ------------------------------------------------------------------------------------*/
