@@ -16,71 +16,80 @@ using namespace std;
 
 
 int main() {
-	bool again = true;
-	
-	while (again) {
-		char menuChoice;
+	bool done = false;
+	bool retry;
+	while (!done) {
+		int menuChoice;
 		system("cls");
 		cout << "---------- MENU ----------\n";
-		cout << "A. Genral notation and commands\n";
-		cout << "B. Assigning Values\n";
-		cout << "C. Adding and subtracting\n";
-		cout << "D. Perimeter example\n";
-		cout << "E. Multiply and Divide\n";
-		cout << "F. Menu Ordering\n";
-		cout << "G. Triangle(Division)\n";
-		cout << "H. Bitwise Opperators\n";
-		cout << "I. Binary output\n";
-		cout << "J. Binary output using Assembly(\"mostly\")\n";
-		cout << "K. Making Decisions\n";
-		cout << "L. Advanced Menu\n";
+		cout << "1. Genral notation and commands\n";
+		cout << "2. Assigning Values\n";
+		cout << "3. Adding and subtracting\n";
+		cout << "4. Perimeter example\n";
+		cout << "5. Multiply and Divide\n";
+		cout << "6. Menu Ordering\n";
+		cout << "7. Triangle(Division)\n";
+		cout << "8. Bitwise Opperators\n";
+		cout << "9. Binary output\n";
+		cout << "10. Binary output using Assembly(\"mostly\")\n";
+		cout << "11. Making Decisions\n";
+		cout << "12. Advanced Menu\n";
 		cout << "0. Exit\n";
 		cout << "Enter a choice: ";
-		cin >> menuChoice;
+		do {
+			retry = false;
+			cout << "\tPlease, make a selection: ";
+			if (!(cin >> menuChoice)) {
+				cin.clear();
+				cin.ignore(256, '\n');
+				cout << "Sorry I didn't recognize that.\n";
+				retry = true;
+			}
+		} while (retry);
 
 		switch (toupper(menuChoice))
 		{
-		case '0':
+		case 0:
 			cin.ignore();
 			cout << "Enter 0 again to exit: ";
 			if (cin.get() == '0') {
-				again = false;
+				done = true;
 			}
 			break;
-		case 'A':
+		case 1:
 			commandsAndMore();
 			break;
-		case 'B':
+		case 2:
 			assignment();
 			break;
-		case 'C':
+		case 3:
 			add_sub();
 			break;
-		case 'D':
+		case 4:
 			perimeter();
 			break;
-		case 'E':
+		case 5:
 			multiDiv();
 			break;
-		case 'F':
+		case 6:
 			Menu();
 			break;
-		case 'G':
+		case 7:
 			triangle();
 			break;
-		case 'H':
+		case 8:
 			bitwise();
 			break;
-		case 'I':
+		case 9:
 			binary();
 			break;
-		case 'J':
+		case 10:
 			binary_asm();
 			break;
-		case 'K':
+		case 11:
 			decision();
 			break;
-		case 'L':
+		case 12:
 			advancedMenu();
 			break;
 		default:
