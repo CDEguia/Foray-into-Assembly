@@ -13,15 +13,15 @@ const short PRIME_PRICE = 6;
 
 //declare identifiers
 short BillTotal = 0, i;
-short DriNum, DinNum;
-char DriKind, DinKind, ans;
+short NumberOfDrinks, NumberOfDinners;
+char KindOfDrink, KindOfDinner, ans;
 
-void AskDrinks(){
+void AskForDrinks(){
 	bool again;
 	do {
 		again = false;
 		cout << "\t\tHow many drinks would you all like? ";
-		if (!(cin >> DriNum)) {
+		if (!(cin >> NumberOfDrinks)) {
 			cin.clear();
 			cin.ignore(256, '\n');
 			cout << "Sorry I didn't recognize that.\n";
@@ -29,8 +29,8 @@ void AskDrinks(){
 		}
 	} while (again);
 }
-void AskDrinkKind(){
-cout << "\t\tWhat kind of drink(s/w/b)? "; cin >> DriKind;
+void AskKindOfDrink(){
+cout << "\t\tWhat kind of drink(s/w/b)? "; cin >> KindOfDrink;
 }
 void GiveWater() {
 	cout << "\tOne WATER coming up...\n";
@@ -53,12 +53,12 @@ void GivePrime() {
 void DontHave() {
 	cout << "\tSorry we don't have that...\n";
 }
-void AskDinners() {
+void AskNumberOfDinners() {
 	bool again;
 	do {
 		again = false;
 		cout << "\t\tHow many dinners would you all like? ";
-		if (!(cin >> DinNum)) {
+		if (!(cin >> NumberOfDinners)) {
 			cin.clear();
 			cin.ignore(256, '\n');
 			cout << "Sorry I didn't recognize that.\n";
@@ -66,8 +66,8 @@ void AskDinners() {
 		}
 	} while (again);
 }
-void AskDinnerKind() {
-	cout << "\t\tWhat kind of dinner(t/r/p)? "; cin >> DinKind;
+void AskKindOfDinner() {
+	cout << "\t\tWhat kind of dinner(t/r/p)? "; cin >> KindOfDinner;
 }
 void displayTotal(){
 cout << showpoint << fixed << setprecision(2);
@@ -105,9 +105,9 @@ void advancedMenu()
 	_asm {
 		call menu;
 	Drinks:;
-		call AskDrinks;
+		call AskForDrinks;
 		
-		cmp DriNum, 0;
+		cmp NumberOfDrinks, 0;
 			Je ConfirmDrink;
 		Jmp GetDrinks;
 		
@@ -123,39 +123,39 @@ void advancedMenu()
 		GetDrinks:;
 			mov i, 1;
 			forLoop:
-				mov cx, DriNum;
+				mov cx, NumberOfDrinks;
 				cmp i, cx;
 				Jg done;
 				
-				call AskDrinkKind;
+				call AskKindOfDrink;
 				
-				cmp DriKind, 's';
+				cmp KindOfDrink, 's';
 					jne testForSWB;
 				//compute soda price
 				Jmp SodaCost;
 
 				testForSWB:;
-				cmp DriKind, 'S';
+				cmp KindOfDrink, 'S';
 				Jne testForWB;
 					//compute soda price
 					Jmp SodaCost;
 					
 				testForWB:;
-					cmp DriKind, 'w';
+					cmp KindOfDrink, 'w';
 					Jne testForW;
 					Jmp WaterCost;
 					
 				testForW:;
-					cmp DriKind, 'W';
+					cmp KindOfDrink, 'W';
 					Jne testBeer;
 					Jmp WaterCost;
 					
 				testBeer:;
-					cmp DriKind, 'b';
+					cmp KindOfDrink, 'b';
 					Jne testForB;
 					Jmp BeerCost;
 				testForB:;
-					cmp DriKind, 'B';
+					cmp KindOfDrink, 'B';
 					Jne NotFound;
 				
 				BeerCost:;
@@ -183,9 +183,9 @@ void advancedMenu()
 			done:
 				call displayTotal;
 		Dinners:;
-				call AskDinners;
+				call AskNumberOfDinners;
 
-				cmp DinNum, 0;
+				cmp NumberOfDinners, 0;
 				Je ConfirmDinner;
 				Jmp GetDinners;
 
@@ -201,39 +201,39 @@ void advancedMenu()
 			GetDinners:;
 				mov i, 1;
 				forLoopD:
-					mov cx, DinNum;
+					mov cx, NumberOfDinners;
 					cmp i, cx;
 					Jg Total;
 
-					call AskDinnerKind;
+					call AskKindOfDinner;
 
-					cmp DinKind, 't';
+					cmp KindOfDinner, 't';
 					jne testForTRP;
 					//compute soda price
 					Jmp TurkeyCost;
 
 					testForTRP:;
-						cmp DinKind, 'T';
+						cmp KindOfDinner, 'T';
 						Jne testForRP;
 						//compute soda price
 						Jmp TurkeyCost;
 
 					testForRP:;
-						cmp DinKind, 'r';
+						cmp KindOfDinner, 'r';
 						Jne testForR;
 						Jmp RoastCost;
 
 					testForR:;
-						cmp DinKind, 'R';
+						cmp KindOfDinner, 'R';
 						Jne testPrime;
 						Jmp RoastCost;
 
 					testPrime:;
-						cmp DinKind, 'p';
+						cmp KindOfDinner, 'p';
 						Jne testForP;
 						Jmp PrimeCost;
 					testForP:;
-						cmp DinKind, 'P';
+						cmp KindOfDinner, 'P';
 						Jne NotFoundD;
 
 					PrimeCost:;
