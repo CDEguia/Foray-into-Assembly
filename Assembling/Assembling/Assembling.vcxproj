@@ -123,6 +123,7 @@
     <ClInclude Include="Perimeter.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="theTriangle.h" />
+    <ClInclude Include="Voter.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />

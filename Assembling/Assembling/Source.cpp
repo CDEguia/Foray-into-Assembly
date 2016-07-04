@@ -11,6 +11,7 @@
 #include "Binary_ASM.h"
 #include "Making_Decisions.h"
 #include "AdvancedMenu.h"
+#include "Voter.h"
 
 using namespace std;
 
@@ -34,11 +35,12 @@ int main() {
 		cout << "10. Binary output using Assembly(\"mostly\")\n";
 		cout << "11. Making Decisions\n";
 		cout << "12. Advanced Menu\n";
+		cout << "13. Voter\n";
 		cout << "0. Exit\n";
-		cout << "Enter a choice: ";
+		//cout << "Enter a choice: ";
 		do {
 			retry = false;
-			cout << "\tPlease, make a selection: ";
+			cout << "Please, make a selection: ";
 			if (!(cin >> menuChoice)) {
 				cin.clear();
 				cin.ignore(256, '\n');
@@ -91,6 +93,9 @@ int main() {
 			break;
 		case 12:
 			advancedMenu();
+			break;
+		case 13:
+			voter();
 			break;
 		default:
 			cout << "\nChoice not found.\n\n";
