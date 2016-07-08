@@ -13,6 +13,8 @@
 #include "AdvancedMenu.h"
 #include "Voter.h"
 #include "Arrays.h"
+#include "MultiDimArray.h"
+
 
 using namespace std;
 
@@ -38,6 +40,7 @@ int main() {
 		cout << "12. Advanced Menu\n";
 		cout << "13. Voter\n";
 		cout << "14. Arrays\n";
+		cout << "15. Multi Dimentional Array\n";
 		cout << "0. Exit\n";
 		//cout << "Enter a choice: ";
 		do {
@@ -101,6 +104,9 @@ int main() {
 			break;
 		case 14:
 			arrays();
+			break;
+		case 15:
+			multidimarray();
 			break;
 		default:
 			cout << "\nChoice not found.\n\n";
