@@ -1,33 +1,35 @@
 #pragma once
 
-using namespace std;
-int loc, contains, number, max, min, average;
+int loc, contains, number, max, min, Tot, average;
 char arrayName;
 
 void ShowNumber() {
-	cout << "\n" << arrayName << "[" << loc << "] = " << contains << endl;
+	std::cout << "\n" << arrayName << "[" << loc << "] = " << contains << endl;
 }
 
 void GetNumber() {
-	cout << "Enter a number: "; cin >> number;
+	std::cout << "Enter a number: "; cin >> number;
 }
 
 void DisplayMax() {
-	cout << "The Highest number is: " << max << endl;
+	std::cout << "\tThe Highest number is: " << max << endl;
 }
 
 void DisplayMin() {
-	cout << "The Lowest number is: " << min << endl;
+	std::cout << "\tThe Lowest number is: " << min << endl;
 }
 void DisplayAvg() {
-	cout << "The Average is: " << average << endl;
+	std::cout << "\tThe Average is: " << average << endl;
+}
+void DisplayTot() {
+	std::cout << "\tThe Total is: " << Tot << endl;
 }
 
 void arrays() {
 	system("cls");
-	cout << "---------------- ARRAYS ---------------\n\n";
-	cout << "\tIn an array of integers each block of data consists of 4 bytes.\n";
-	cout << "By using the ebx register to hold the \"next\" location of each integer we can use _asm{} to create the array.";
+	std::cout << "---------------- ARRAYS ---------------\n\n";
+	std::cout << "\tIn an array of integers each block of data consists of 4 bytes.\n";
+	std::cout << "By using the ebx register to hold the \"next\" location of each integer we can use _asm{} to create the array.";
 
 	int c[3];
 
@@ -128,6 +130,27 @@ void arrays() {
 		mov min, ecx;
 		call DisplayMin;
 	}
+	system("pause");
+
+	cout << "\nComputing the Total...\n";
+	_asm {
+		mov ecx, 0;
+		mov loc, 0;
+		mov ebx, 0;
+	totLoop:
+		add ecx, [b + ebx];
+		inc loc;
+		add ebx, 4;
+		cmp loc, 6;
+		je totEnd;
+		jmp totLoop;
+
+	totEnd:
+		mov eax, ecx;
+		mov Tot, eax;		
+		call DisplayTot;
+	}
+	system("pause");
 	cout << "\nComputing the Average...\n";
 	int six = 6;
 	_asm {
