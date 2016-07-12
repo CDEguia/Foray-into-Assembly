@@ -1,41 +1,46 @@
 #pragma once
-using namespace std;
 
 void DisplayMr() {
-	cout << "Hello Sir";
+	std::cout << "Hello Sir";
 }
 void DisplayMrs() {
-	cout << "Hello Ma'am";
+	std::cout << "Hello Ma'am";
 }
 void NextLine() {
-	cout << endl;
+	std::cout << endl;
 }
 void DisplayPreeTeen() {
-	cout << "You are a pree Teen";
+	std::cout << "You are a pree Teen";
 }
 void DisplayAdult() {
-	cout << "You are an Adult";
+	std::cout << "You are an Adult";
 }
 void DisplayTeen() {
-	cout << "You are a Teenager";
+	std::cout << "You are a Teenager";
 }
 void decision() {
 	system("cls");
-	cout << "--------------- Decision ---------------\n\n";
-	cout << "simple if statement\n\n";
+	std::cout << "--------------- Decision ---------------\n\n";
+	std::cout << "simple if statement\n\n";
 	char gender;
-	cout << "Enter m for male: "; cin >> gender;
+	std::cout << "Enter m for male: "; std::cin >> gender;
 	_asm {
-		cmp gender, 'm'
-		Jne else
-		call DisplayMr
-		Jmp cont
-		else: call DisplayMrs
+		cmp gender, 'm';
+		Jne else;
+		call DisplayMr;
+		Jmp cont;
+		else: 
+			cmp gender, 'M';
+			je DispMr;
+			call DisplayMrs;
+			Jmp cont;
+		DispMr:
+			call DisplayMr;
 		cont:
-		call NextLine
+			call NextLine
 	}
 
-	cout << "Enter f or F for female: "; cin >> gender;
+	std::cout << "Enter f or F for female: "; std::cin >> gender;
 	_asm {
 		cmp gender, 'f'; compares gender to 'f'
 		Jne TestForF; Jumps to TestForF if gender != 'f'
@@ -53,9 +58,9 @@ void decision() {
 	}
 
 	short age;
-	cout << "Using the ge(>=) and le(<=)\n";
+	std::cout << "Using the ge(>=) and le(<=)\n";
 	do {
-		cout << "Enter your age or 0 to exit: "; cin >> age;
+		std::cout << "Enter your age or 0 to exit: "; std::cin >> age;
 		if (age != 0) {
 			_asm {
 				cmp age, 12

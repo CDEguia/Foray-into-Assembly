@@ -1,7 +1,8 @@
 #pragma once
+#include <string>
 using namespace std;
 int temp, I, total=0, mainChoice, howMany, shirtStock[3][4][5];
-/*													3 colors
+												/*	3 colors
 														4 sizes
 														    5 types */
 char colorChoice, clothChoice, sizeChoice;
@@ -52,7 +53,7 @@ void color() {
 	cout << "Enter a letter: ";
 	cin >> colorChoice;
 }
-void sizeA() {
+void sizeGet() {
 	cout << "S. Small\n";
 	cout << "M. Medium\n";
 	cout << "L. Large\n";
@@ -71,20 +72,67 @@ void DisplayTotal() {
 	system("pause");
 }
 
+void DisplayTotalColor() {
+	string thiscolor;
+	if (colorChoice == 'r' || colorChoice == 'R') { 
+		thiscolor = "Red"; 
+	}else if(colorChoice == 'g' || colorChoice == 'G') {
+		thiscolor = "Green";
+	}
+	else{ thiscolor = "Blue"; }
+	
+	cout << "There are " << total << " " << thiscolor << " shirts in stock.\n";
+	system("pause");
+}
+void DisplayTotalSize() {
+	string thisize;
+	switch (sizeChoice) {
+	case 's':
+	case 'S':
+		thisize = "Small";
+		break;
+	case 'm':
+	case 'M':
+		thisize = "medium";
+		break;
+	case 'l':
+	case 'L':
+		thisize = "large";		
+		break;
+	case 'x':
+	case 'X':
+		thisize = "Xlarge";
+	}
+
+	cout << "There are " << total << " " << thisize << " shirts in stock.\n";
+	system("pause");
+}
+
 void multidimarray() {
 	_asm {
 
 		mov ebx, 0;
-		mov I, 1;
+		mov I, 0;
 		mov eax, 0;
 	fillArray:
-		cmp I, 61;
+		cmp I, 60;
 		Je endFillArray;
-		mov ecx, I;
-		mov [shirtStock + ebx], ecx;
-		inc I;
-		add ebx, 4;
-		Jmp fillArray;
+		cmp I, 20;
+		jge above20;
+		mov ecx, 1;
+		jmp setarray;
+		above20:
+			cmp I, 40;
+			jge above40;
+			mov ecx, 2;
+			jmp setarray;
+		above40:
+			mov ecx, 3;
+		setarray:
+			mov [shirtStock + ebx], ecx;
+			inc I;
+			add ebx, 4;
+			Jmp fillArray;
 	endFillArray:
 
 	MainLoop:
@@ -105,7 +153,7 @@ void multidimarray() {
 			call updateMenu;
 			call cloth;
 			call color;
-			call sizeA;
+			call sizeGet;
 			call HowMany;
 
 			jmp ReLoop;
@@ -125,20 +173,182 @@ void multidimarray() {
 				mov total, ecx;
 				call DisplayTotal;
 			jmp ReLoop;
-		
+			
 		PickCloth:
 			call clothMenu;
 			call cloth;
-			jmp ReLoop;
-		
+			mov total, 0;
+			cmp clothChoice, 'a';
+			jge LowerCaseCloth;
+
+			cmp clothChoice, 'C';
+			je ComputeCotten;
+			cmp clothChoice, 'P';
+			je ComputePolly;
+			cmp clothChoice, 'B';
+			je ComputeCP;
+			cmp clothChoice, 'N';
+			je ComputeNylon;
+			cmp clothChoice, 'O';
+			je ComputeCPN;
+			jmp PickSize;
+
+			LowerCaseCloth:
+				cmp clothChoice, 'c';
+				je ComputeCotten;
+				cmp clothChoice, 'p';
+				je ComputePolly;
+				cmp clothChoice, 'b';
+				je ComputeCP;
+				cmp clothChoice, 'n';
+				je ComputeNylon;
+				cmp clothChoice, 'o';
+				je ComputeCPN;
+				jmp PickSize;
+				;//vvvvvvvvv Section Needs updated to the Cloth choice types vvvvvvvvvv
+			ComputeSmall:
+				mov ebx, 0;
+				jmp ComputeSize;
+			ComputeMedium:
+				mov ebx, 20;
+				jmp ComputeSize;
+			ComputeLarge:
+				mov ebx, 40;
+				jmp ComputeSize;
+			ComputeXL:
+				mov ebx, 60;
+
+			ComputeSize:
+				mov ecx, 0;
+				mov I, 0;
+			SizeLoop:
+				add ecx, [shirtStock + ebx];
+				inc I;
+				cmp I, 15;
+				je endSizeLoop;
+				cmp I, 5;
+				je NextColor;
+				cmp I, 10;
+				je NextColor;
+				add ebx, 4;
+				jmp SizeLoop;
+			NextColor:
+				add ebx, 64;
+				jmp SizeLoop;
+			endSizeLoop:
+				mov total, ecx;
+				call DisplayTotalSize;
+				jmp ReLoop;
+				;//^^^^^^^^^^^ Section Needs updated to the Cloth choice types ^^^^^^^^^^
+
 		PickColor:
 			call colorMenu;
 			call color;
+			cmp colorChoice, 'a';
+			jge LowerCase;
+			
+			cmp colorChoice, 'R';
+			je ComputeRed;
+			cmp colorChoice, 'G';
+			je ComputeGreen;
+			cmp colorChoice, 'B';
+			je ComputeBlue;
+			jmp PickColor;
+			
+			LowerCase:
+				cmp colorChoice, 'r';
+				je ComputeRed;
+				cmp colorChoice, 'g';
+				je ComputeGreen;
+				cmp colorChoice, 'b';
+				je ComputeBlue;
+				jmp PickColor;
+
+			ComputeRed:
+				mov ebx, 0;
+				jmp ComputeColor;
+			ComputeGreen:
+				mov ebx, 20;
+				jmp ComputeColor;
+			ComputeBlue:
+				mov ebx, 40;
+				jmp ComputeColor;
+
+			ComputeColor:
+				mov ecx, 0;
+				mov I, 0;
+			ColorLoop:
+				add ecx, [shirtStock + ebx];
+				inc I;
+				add ebx, 4;
+				cmp I, 20;
+				je endColorLoop;
+				jmp ColorLoop;
+			endColorLoop:
+				mov total, ecx;
+				call DisplayTotalColor;
 			jmp ReLoop;
 
 		PickSize:
 			call sizeMenu;
-			call sizeA;
+			call sizeGet;
+			mov total, 0;
+			cmp sizeChoice, 'a';
+			jge LowerCaseSize;
+
+			cmp sizeChoice, 'S';
+			je ComputeSmall;
+			cmp sizeChoice, 'M';
+			je ComputeMedium;
+			cmp sizeChoice, 'L';
+			je ComputeLarge;
+			cmp sizeChoice, 'X';
+			je ComputeXL;
+			jmp PickSize;
+
+			LowerCaseSize:
+				cmp sizeChoice, 's';
+				je ComputeSmall;
+				cmp sizeChoice, 'm';
+				je ComputeMedium;
+				cmp sizeChoice, 'l';
+				je ComputeLarge;
+				cmp sizeChoice, 'x';
+				je ComputeXL;
+				jmp PickSize;
+
+			ComputeSmall:
+				mov ebx, 0;
+				jmp ComputeSize;
+			ComputeMedium:
+				mov ebx, 20;
+				jmp ComputeSize;
+			ComputeLarge:
+				mov ebx, 40;
+				jmp ComputeSize;
+			ComputeXL:
+				mov ebx, 60;
+
+			ComputeSize:
+				mov ecx, 0;
+				mov I, 0;
+			SizeLoop:
+				add ecx, [shirtStock + ebx];
+				inc I;
+				cmp I, 15;
+				je endSizeLoop;
+				cmp I, 5;
+				je NextColor;
+				cmp I, 10;
+				je NextColor;
+				add ebx, 4;
+				jmp SizeLoop;
+				NextColor:
+					add ebx, 64;
+				jmp SizeLoop;
+			endSizeLoop:
+				mov total, ecx;
+				call DisplayTotalSize;
 
 		ReLoop:
 			jmp MainLoop;
