@@ -60,6 +60,9 @@
     <ClInclude Include="Arrays.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MultiDimArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
