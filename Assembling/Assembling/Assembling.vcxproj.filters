@@ -63,6 +63,9 @@
     <ClInclude Include="MultiDimArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FloatingPointMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">

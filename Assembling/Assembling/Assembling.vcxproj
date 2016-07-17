@@ -118,6 +118,7 @@
     <ClInclude Include="Binary_ASM.h" />
     <ClInclude Include="Bitwise.h" />
     <ClInclude Include="CommandsAndMore.h" />
+    <ClInclude Include="FloatingPointMenu.h" />
     <ClInclude Include="Making_Decisions.h" />
     <ClInclude Include="MenuOrder.h" />
     <ClInclude Include="MultiDimArray.h" />
