@@ -7,17 +7,7 @@
 //		Professor	Ray Ahmadnia
 //
 //   This program displays:
-//For the following Triangle:
-//                   ^
-//					/ \
-//                 / | \
-//                /  |  \ height
-//               /   |   \
-//              -----------
-//                 base
-//Enter the height: 10
-//Enter the base: 20
-//		Area = 100
+//	the area of a triangle
 //----------------------------------------------------------
 using namespace std;
 
@@ -49,3 +39,18 @@ void triangle() {
 
 	system("pause");
 }
+/*--------------------------------Output-----------------------------------------
+---------- Division ---------
+
+             ^
+            / \
+           / | \ h
+          /  |  \
+         /   |   \
+        -----------
+             b
+Enter the height: 8
+Enter the base: 32
+         The area is: 128
+Press any key to continue . . .
+-------------------------------------------------------------------------------*/

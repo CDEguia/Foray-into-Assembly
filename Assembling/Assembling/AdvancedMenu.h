@@ -1,4 +1,14 @@
 #pragma once
+//----------------------------------------------------------
+//		Name		Candelario Eguia
+//		Course		CMPS-371
+//		Project		No.5 part I
+//		Due date	July 18, 2016
+//		Professor	Ray Ahmadnia
+//
+//   This program displays:
+//		Dinner Menu using short numbers
+//----------------------------------------------------------
 #include <iomanip>
 
 using namespace std;
@@ -128,39 +138,28 @@ void advancedMenu()
 				Jg done;
 				
 				call AskKindOfDrink;
+				cmp KindOfDrink, 'a'; // answer is lower or upper case
+				jge amLowerCase;
 				
-				cmp KindOfDrink, 's';
-					jne testForSWB;
-				//compute soda price
-				Jmp SodaCost;
-
-				testForSWB:;
 				cmp KindOfDrink, 'S';
-				Jne testForWB;
-					//compute soda price
-					Jmp SodaCost;
-					
-				testForWB:;
-					cmp KindOfDrink, 'w';
-					Jne testForW;
-					Jmp WaterCost;
-					
-				testForW:;
-					cmp KindOfDrink, 'W';
-					Jne testBeer;
-					Jmp WaterCost;
-					
-				testBeer:;
-					cmp KindOfDrink, 'b';
-					Jne testForB;
-					Jmp BeerCost;
-				testForB:;
-					cmp KindOfDrink, 'B';
-					Jne NotFound;
+					je SodaCost;
+				cmp KindOfDrink, 'W';
+					je WaterCost;
+				cmp KindOfDrink, 'B';
+					je BeerCost;
+					Jmp NotFound;
+			amLowerCase:
+				cmp KindOfDrink, 's';
+					je SodaCost;
+				cmp KindOfDrink, 'w';
+					je WaterCost;
+				cmp KindOfDrink, 'b';
+					Je BeerCost;					
+				Jmp NotFound;
 				
 				BeerCost:;
 					mov dx, BEER_PRICE
-					add BillTotal, dx;
+						add BillTotal, dx;
 					call GiveBeer;
 					Jmp BottomOfLoop;
 				WaterCost:;
@@ -206,35 +205,24 @@ void advancedMenu()
 					Jg Total;
 
 					call AskKindOfDinner;
+					cmp KindOfDinner, 'a'; // answer is lower or upper case
+					jge gdLowerCase;
 
+					cmp KindOfDinner, 'T';
+					je TurkeyCost;
+					cmp KindOfDinner, 'R';
+					je RoastCost;
+					cmp KindOfDinner, 'P';
+					je PrimeCost;
+					Jmp NotFound;
+				gdLowerCase:
 					cmp KindOfDinner, 't';
-					jne testForTRP;
-					//compute soda price
-					Jmp TurkeyCost;
-
-					testForTRP:;
-						cmp KindOfDinner, 'T';
-						Jne testForRP;
-						//compute soda price
-						Jmp TurkeyCost;
-
-					testForRP:;
-						cmp KindOfDinner, 'r';
-						Jne testForR;
-						Jmp RoastCost;
-
-					testForR:;
-						cmp KindOfDinner, 'R';
-						Jne testPrime;
-						Jmp RoastCost;
-
-					testPrime:;
-						cmp KindOfDinner, 'p';
-						Jne testForP;
-						Jmp PrimeCost;
-					testForP:;
-						cmp KindOfDinner, 'P';
-						Jne NotFoundD;
+					je TurkeyCost;
+					cmp KindOfDinner, 'r';
+					je RoastCost;
+					cmp KindOfDinner, 'p';
+					Je PrimeCost;
+					Jmp NotFound;
 
 					PrimeCost:;
 						mov dx, PRIME_PRICE
@@ -266,5 +254,29 @@ void advancedMenu()
 	system("pause");
 }
 /*--------------------Output----------------------------------------------------------
+        |--------- (K) Store menu ---------|
+        | Drinks:                          |
+        |        Water (w)...........$1.00 |
+        |        Soda (s)............$2.00 |
+        |        Beer (b)............$3.00 |
+        | Dinners:                         |
+        |        Turkey (t)..........$4.00 |
+        |        Roast Beef (r)......$5.00 |
+        |        Prime Rib (p).......$6.00 |
 
+                How many drinks would you all like? 3
+                What kind of drink(s/w/b)? s
+        One SODA coming up...
+                What kind of drink(s/w/b)? w
+        One WATER coming up...
+                What kind of drink(s/w/b)? B
+        One BEER coming up...
+                        Total Bill = $6.00
+                How many dinners would you all like? 2
+                What kind of dinner(t/r/p)? p
+        One PRIME RIB DINNER coming up...
+                What kind of dinner(t/r/p)? T
+        One TURKEY DINNER coming up...
+                        Total Bill = $16.00
+Press any key to continue . . .
 ------------------------------------------------------------------------------------*/

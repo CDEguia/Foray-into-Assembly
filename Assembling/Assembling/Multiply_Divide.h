@@ -16,7 +16,7 @@ void multiDiv() {
 	cout << "First we will look at incrementation and deincrementation.\n";
 	cout << "Assembly uses the key words inc and dec to increment and deincrement a variable.\n";
 	short l, h;
-	cout << "low = 10\n";
+	cout << "low = 10\n";	
 	cout << "high = 20\n";
 	_asm {
 		mov ax, 10

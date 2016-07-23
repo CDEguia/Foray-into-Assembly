@@ -15,6 +15,7 @@
 #include "Arrays.h"
 #include "MultiDimArray.h"
 #include "FloatingPointMenu.h"
+#include "GradesBasic.h"
 
 
 using namespace std;
@@ -43,6 +44,7 @@ int main() {
 		cout << "14. Arrays\n";
 		cout << "15. Multi Dimentional Array\n";
 		cout << "16. Resturaunt Menu, using floating point\n";
+		cout << "17. Grades\n";
 		cout << "0. Exit\n";
 		//cout << "Enter a choice: ";
 		do {
@@ -112,6 +114,9 @@ int main() {
 			break;
 		case 16:
 			floatingPointMenu();
+			break;
+		case 17:
+			gradesbasic();
 			break;
 		default:
 			cout << "\nChoice not found.\n\n";

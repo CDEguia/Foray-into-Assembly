@@ -119,6 +119,7 @@
     <ClInclude Include="Bitwise.h" />
     <ClInclude Include="CommandsAndMore.h" />
     <ClInclude Include="FloatingPointMenu.h" />
+    <ClInclude Include="GradesBasic.h" />
     <ClInclude Include="Making_Decisions.h" />
     <ClInclude Include="MenuOrder.h" />
     <ClInclude Include="MultiDimArray.h" />

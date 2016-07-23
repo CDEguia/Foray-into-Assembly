@@ -1,8 +1,15 @@
 #pragma once
-
-using namespace std;
-
-int assemble(short a2, short b2, short c2, short d2) {
+//----------------------------------------------------------
+//		Name		Candelario Eguia
+//		Course		CMPS-371
+//		Project		No.1 part III
+//		Due date	June 26, 2016
+//		Professor	Ray Ahmadnia
+//
+//   This program displays:
+//	Find the perimeter
+//----------------------------------------------------------
+short assemble(short a2, short b2, short c2, short d2) {
 	short p2;
 	_asm {
 		mov ax, a2
@@ -17,7 +24,7 @@ int assemble(short a2, short b2, short c2, short d2) {
 void perimeter() {
 	system("cls");
 	cout << "---------- Perimeter ---------\n";
-	short a, b, c, d;
+	short a, b, c, d, total;
 	cout << "\t\ta\n";
 	cout << "     ---------------------\n";
 	cout << "    /                      \\\n";
@@ -26,17 +33,26 @@ void perimeter() {
 	cout << " /                            \\\n";
 	cout << " ------------------------------\n";
 	cout << " \t\td\n";
-
-	cout << "Enter the values of a, b, c, d:";
+	cout << "Enter the values of a, b, c, d:"; 
 	cin >> a >> b >> c >> d;
-
-	cout << "\t The perimeter is : " << assemble(a, b, c, d) << endl;
-	cout << "_asm\t\tcomment\n";
-	cout << "mov ax, a \t ; ax = the contents of a. a is unchanged.\n";
-	cout << "add ax, b \t ; ax = ax + b\n";
-	cout << "add ax, c\n";
-	cout << "add ax, d\n";
-	cout << "mov p2, ax \t ; p2 = ax allowing 2p to be used elsewhere in the program.\n";
-
+	
+	total = assemble(a, b, c, d);
+	cout << "\t The perimeter is : " << endl;
+	cout << a << " + " << b << " + " << c << " + " << d << " = " << total << endl;
 	system("pause");
 }
+/*--------------------Output-----------------------------------------------------
+---------- Perimeter ---------
+                a
+     ---------------------
+    /                      \
+ b /                        \ c
+  /                          \
+ /                            \
+ ------------------------------
+                d
+Enter the values of a, b, c, d:1 2 3 4
+         The perimeter is :
+1 + 2 + 3 + 4 = 10
+Press any key to continue . . .
+-------------------------------------------------------------------------------*/
