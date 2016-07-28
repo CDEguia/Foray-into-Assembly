@@ -1,38 +1,36 @@
 #pragma once
-
-int loc, contains, number, max, min, Tot, average;
+//-------------------------------------------------------------------------------
+//		Name		Candelario Eguia
+//		Course		CMPS-371
+//		Project		No.9 part I
+//		Due date	June 26, 2016
+//		Professor	Ray Ahmadnia
+//
+//   This program displays:
+//		Array, calculation of High Low Total & average
+//-------------------------------------------------------------------------------
+int loc, contains, number, maxA, minA, Tot, average;
 char arrayName;
 
 void ShowNumber() {
-	std::cout << "\n" << arrayName << "[" << loc << "] = " << contains << endl;
+	std::cout << arrayName << "[" << loc << "] = " << contains << " | ";
 }
+void GetNumber() { std::cout << "\tEnter a number: "; cin >> number; }
 
-void GetNumber() {
-	std::cout << "Enter a number: "; cin >> number;
-}
+void DisplayMax() { std::cout << "\tThe Highest number is: " << maxA << endl; }
 
-void DisplayMax() {
-	std::cout << "\tThe Highest number is: " << max << endl;
-}
+void DisplayMin() { std::cout << "\tThe Lowest number is: " << minA << endl; }
 
-void DisplayMin() {
-	std::cout << "\tThe Lowest number is: " << min << endl;
-}
-void DisplayAvg() {
-	std::cout << "\tThe Average is: " << average << endl;
-}
-void DisplayTot() {
-	std::cout << "\tThe Total is: " << Tot << endl;
-}
+void DisplayAvg() {	std::cout << "\tThe Average is: " << average << endl; }
+
+void DisplayTot() { std::cout << "\tThe Total is: " << Tot << endl; }
+
+void Pause() { cout << endl; system("pause"); }
 
 void arrays() {
 	system("cls");
 	std::cout << "---------------- ARRAYS ---------------\n\n";
-	std::cout << "\tIn an array of integers each block of data consists of 4 bytes.\n";
-	std::cout << "By using the ebx register to hold the \"next\" location of each integer we can use _asm{} to create the array.";
-
-	int c[3];
-
+	int c[3], b[6], six = 6;
 	_asm {
 		mov ebx, 0;
 		mov[c + ebx], 10;
@@ -40,7 +38,6 @@ void arrays() {
 		mov[c + ebx], 15; 
 		add ebx, 4
 		mov[c + ebx], 7;
-		
 		mov ebx, 0;
 		mov loc, 0;
 		mov arrayName, 'c';
@@ -54,11 +51,8 @@ void arrays() {
 			je Done;
 			jmp forLoop;
 		Done:
-	}
-	system("pause");
-
-	int b[6];
-	_asm {
+			call Pause;
+;//---vvvvv--- User input and output ---vvvvv---
 		mov ebx, 0;
 		mov loc, 0;
 	forLoopA:
@@ -84,11 +78,7 @@ void arrays() {
 			je DisplayDone;
 			jmp DisplayLoop;
 		DisplayDone:
-	}
-	
-	cout << "\nComputing the Highest Number...\n";
-	
-	_asm {
+;//---vvvvv--- Compute Heighest Number ---vvvvv---
 		mov ecx, 0;
 		mov loc, 0;
 		mov ebx, 0;
@@ -96,44 +86,33 @@ void arrays() {
 		cmp[b + ebx], ecx ;
 		jle lessThen;
 		mov ecx, [b + ebx];
-
 		lessThen:
 			inc loc;
 			add ebx, 4;
 			cmp loc, 6;
 			je maxEnd;
 			jmp maxLoop;
-
 		maxEnd:
-			mov max, ecx;
+			mov maxA, ecx;
 			call DisplayMax;
-	}
-
-	cout << "\nComputing the Lowest Number...\n";
-	_asm {
-		mov ecx, 999999;
+;//---vvvvv--- Compute Lowest Number ---vvvvv---
+		mov ecx, 9999;
 		mov loc, 0;
 		mov ebx, 0;
 	minLoop:
 		cmp[b + ebx], ecx;
 		jge greaterThen;
 		mov ecx, [b + ebx];
-
 	greaterThen:
 		inc loc;
 		add ebx, 4;
 		cmp loc, 6;
 		je minEnd;
 		jmp minLoop;
-
 	minEnd:
-		mov min, ecx;
+		mov minA, ecx;
 		call DisplayMin;
-	}
-	system("pause");
-
-	cout << "\nComputing the Total...\n";
-	_asm {
+;//---vvvvv--- Compute Total Number ---vvvvv---
 		mov ecx, 0;
 		mov loc, 0;
 		mov ebx, 0;
@@ -144,34 +123,44 @@ void arrays() {
 		cmp loc, 6;
 		je totEnd;
 		jmp totLoop;
-
 	totEnd:
 		mov eax, ecx;
 		mov Tot, eax;		
 		call DisplayTot;
-	}
-	system("pause");
-	cout << "\nComputing the Average...\n";
-	int six = 6;
-	_asm {
+;//---vvvvv--- Compute Average Number ---vvvvv---
 		mov ecx, 0;
 		mov loc, 0;
 		mov ebx, 0;
 	avgLoop:
 		add ecx, [b + ebx];
-		
 		inc loc;
 		add ebx, 4;
 		cmp loc, 6;
 		je avgEnd;
 		jmp avgLoop;
-
 	avgEnd:
 		mov eax, ecx;
 		cdq;
 		idiv six;
 		mov average, eax;
 		call DisplayAvg;
+		call Pause;
 	}
-	system("pause");
 }
+/*--------------------------------Output-----------------------------------------
+---------------- ARRAYS ---------------
+c[0] = 10 | c[1] = 15 | c[2] = 7 |
+Press any key to continue . . .
+	Enter a number: 65
+	Enter a number: 651
+	Enter a number: 65
+	Enter a number: 12
+	Enter a number: 95
+	Enter a number: 75
+b[0] = 65 | b[1] = 651 | b[2] = 65 | b[3] = 12 | b[4] = 95 | b[5] = 75 |
+The Highest number is: 651
+        The Lowest number is: 12
+        The Total is: 963
+        The Average is: 160
+Press any key to continue . . .
+-------------------------------------------------------------------------------*/

@@ -11,7 +11,6 @@
 //----------------------------------------------------------
 #include <iomanip>
 #include <string>
-using namespace std;
 
 //declare constants
 const float fpWATER_PRICE = 1.25;
@@ -85,7 +84,6 @@ void fpConfirm() {
 	cout << "Are you sure no one wants a " << orderItem << " (y/n)? ";
 	cin >> fpAns;
 }
-
 void floatingPointMenu()
 {
 	_asm {
@@ -102,7 +100,6 @@ void floatingPointMenu()
 			cmp fpKindOfDrink, 'B';
 			je fpBeerCost;
 			jmp fpNotFound; // if not found
-
 		fpLowerCase:
 			cmp fpKindOfDrink, 's';
 			je fpSodaCost;
@@ -111,7 +108,6 @@ void floatingPointMenu()
 			cmp fpKindOfDrink, 'b';
 			je fpBeerCost;
 			jmp fpNotFound; // if not found
-		
 		fpBeerCost:;
 			fld fpBEER_PRICE;
 			mov place, 2;
@@ -155,7 +151,6 @@ void floatingPointMenu()
 			cmp fpKindOfDinner, 'T';
 			je fpTurkCost;
 			jmp fpNotFoundDin; // if not found
-
 		fpLowerCaseDin:
 			cmp fpKindOfDinner, 'p';
 			je fpPrimCost;
@@ -164,7 +159,6 @@ void floatingPointMenu()
 			cmp fpKindOfDinner, 't';
 			je fpTurkCost;
 			jmp fpNotFoundDin; // if not found
-
 		fpTurkCost:;
 			fld fpTURKEY_PRICE;
 			mov place, 5;
@@ -197,11 +191,10 @@ void floatingPointMenu()
 		fpdone:
 			call fpdisplayTotal;
 	}
-
 	//terminate program
 	system("pause");
 }
-/*--------------------Output----------------------------------------------------------
+/*--------------------Output-----------------------------------------------------
         |--------- (K) Store menu ---------|
         | Drinks:                          |
         |        Water (w)...........$1.25 |
@@ -223,4 +216,4 @@ void floatingPointMenu()
                 Would any one else like a dinner (y/n)? n
                         Total Bill = $16.00
 Press any key to continue . . .
-------------------------------------------------------------------------------------*/
+--------------------------------------------------------------------------------*/

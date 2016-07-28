@@ -1,21 +1,29 @@
 #pragma once
+//-------------------------------------------------------------------------------
+//		Name		Candelario Eguia
+//		Course		CMPS-371
+//		Project		No.9 part II
+//		Due date	June 26, 2016
+//		Professor	Ray Ahmadnia
+//
+//   This program displays:
+//		Multi Dimentional Array, add subtract and get numbers
+//-------------------------------------------------------------------------------
 #include <string>
 using namespace std;
 int temp, I, total=0, mainChoice, howMany, shirtStock[3][4][5];
-												/*	3 colors
-														4 sizes
-														    5 types */
-char colorChoice, clothChoice, sizeChoice;
+													//	3 colors 4 sizes 5 types
+char UserChoice;
 
 void ShopMenu() {
 	system("cls");
 	cout << "--------------- Shirt Shop -----------------\n";
-	cout << "1. Update Inventory\n";
-	cout << "2. Total Items in Inventory\n";
-	cout << "3. Pick a cloth type to list\n";
-	cout << "4. Pick a color to list\n";
-	cout << "5. Pick a size to list\n";
-	cout << "0. Exit\n";
+	cout << "\t1. Update Inventory\n";
+	cout << "\t2. Total Items in Inventory\n";
+	cout << "\t3. Pick a cloth type to list\n";
+	cout << "\t4. Pick a color to list\n";
+	cout << "\t5. Pick a size to list\n";
+	cout << "\t0. Exit\n";
 	cout << "Enter a number: ";
 	cin >> mainChoice;
 }
@@ -36,77 +44,42 @@ void updateMenu() {
 	cout << "--------------- Update Inventory -----------------\n";
 }
 void cloth() {
-	cout << "C. Cotton\n";
-	cout << "P. Polyester\n";
-	cout << "B. C. P. Blend\n";
-	cout << "N. Nylon\n";
-	cout << "O. C. P. N. Blend\n";
-	cout << "E. Return to Main Menu\n";
-	cout << "Enter a letter: ";
-	cin >> clothChoice;
+	cout << "\tC. Cotton\n";
+	cout << "\tP. Polyester\n";
+	cout << "\tB. Cotton Poly Blend\n";
+	cout << "\tN. Nylon\n";
+	cout << "\tO. Full Blend\n";
+	cout << "\tE. Return to Main Menu\n";
 }
 void color() {
-	cout << "R. Red\n";
-	cout << "G. Green\n";
-	cout << "B. Blue\n";
-	cout << "E. Return to Main Menu\n";
-	cout << "Enter a letter: ";
-	cin >> colorChoice;
+	cout << "\tR. Red\n";
+	cout << "\tG. Green\n";
+	cout << "\tB. Blue\n";
+	cout << "\tE. Return to Main Menu\n";
 }
 void sizeGet() {
-	cout << "S. Small\n";
-	cout << "M. Medium\n";
-	cout << "L. Large\n";
-	cout << "X. Extra Large\n";
-	cout << "E. Return to Main Menu\n";
-	cout << "Enter a letter: ";
-	cin >> sizeChoice;
+	cout << "\tS. Small\n";
+	cout << "\tM. Medium\n";
+	cout << "\tL. Large\n";
+	cout << "\tX. Extra Large\n";
+	cout << "\tE. Return to Main Menu\n";
 }
-
+void getInput() { 
+	cout << "Enter a letter: ";
+	cin >> UserChoice; 
+}
 void HowMany() {
-	cout << "Enter a number (use -### to subtract from inventory): ";
+	cout << "Enter a number (-### to subtract): ";
 	cin >> howMany;
 }
-
 void DisplayTotal() {
 	cout << "There are " << total << " shirts in stock.\n";
 	system("pause");
 }
-
-void DisplayTotalColor() {
-	string thiscolor;
-	if (colorChoice == 'r' || colorChoice == 'R') { 
-		thiscolor = "Red"; 
-	}else if(colorChoice == 'g' || colorChoice == 'G') {
-		thiscolor = "Green";
-	}
-	else{ thiscolor = "Blue"; }
-	
-	cout << "There are " << total << " " << thiscolor << " shirts in stock.\n";
+void DisplayIndividualTotal() {
+	cout << "There are " << total << " " << UserChoice << " shirts in stock.\n";
 	system("pause");
 }
-
-void DisplayTotalSize() {
-	string thisize;
-	switch (sizeChoice) {
-		case 's': case 'S':
-			thisize = "Small"; break;
-		case 'm': case 'M':
-			thisize = "medium"; break;
-		case 'l': case 'L':
-			thisize = "large"; break;
-		case 'x': case 'X':
-			thisize = "Xlarge";
-	}
-	cout << "There are " << total << " " << thisize << " shirts in stock.\n";
-	system("pause");
-}
-
-void DisplayTotalCloth() {
-	cout << "There are " << total << " shirts in stock.\n";
-	system("pause");
-}
-
 void multidimarray() {
 	_asm {
 		;//--vvvv-- fill the multi dim array --vvvv-- 
@@ -119,8 +92,6 @@ void multidimarray() {
 		inc I;
 		add ebx, 4;
 		Jmp fillArray;
-		;
-		;// --^^^^-- End of array fill --^^^^--
 		;
 		;//--vvvv-- Menu display and logic --vvvv-- 
 		;
@@ -140,46 +111,43 @@ void multidimarray() {
 		je PickSize;
 		jmp MainLoop; // Display menu again if user input dosent match
 	;
-	;// --^^^^-- End of Main Menu Logic --^^^^--
-	;
 	;//--vvvv-- Inventory Update logic --vvvv--
 	;
 		InventoryUpdate: 
 			call updateMenu; // Header
-			
-			UIClothChoice:
+	;//--vvvv-- Get cloth input --vvvv--
+		IUClothChoice:
 				call cloth; // Cloth choice menu
-				cmp clothChoice, 'a'; // Decide weather user input
+				call getInput;
+				cmp UserChoice, 'a'; // Decide weather user input
 				jge IULowerCaseCloth; // is upper or lower case.
-
-				cmp clothChoice, 'C';
+				cmp UserChoice, 'C';
 				je IUComputeCotten;
-				cmp clothChoice, 'P';
+				cmp UserChoice, 'P';
 				je IUComputePolly;
-				cmp clothChoice, 'B';
+				cmp UserChoice, 'B';
 				je IUComputeCP;
-				cmp clothChoice, 'N';
+				cmp UserChoice, 'N';
 				je IUComputeNylon;
-				cmp clothChoice, 'O';
+				cmp UserChoice, 'O';
 				je IUComputeCPN;
-				cmp clothChoice, 'E';
+				cmp UserChoice, 'E';
 				je ReLoop;
-				jmp UIClothChoice; // if leter not found
+				jmp IUClothChoice; // if leter not found
 			IULowerCaseCloth:
-				cmp clothChoice, 'c';
+				cmp UserChoice, 'c';
 				je IUComputeCotten;
-				cmp clothChoice, 'p';
+				cmp UserChoice, 'p';
 				je IUComputePolly;
-				cmp clothChoice, 'b';
+				cmp UserChoice, 'b';
 				je IUComputeCP;
-				cmp clothChoice, 'n';
+				cmp UserChoice, 'n';
 				je IUComputeNylon;
-				cmp clothChoice, 'o';
+				cmp UserChoice, 'o';
 				je IUComputeCPN;
-				cmp clothChoice, 'e';
+				cmp UserChoice, 'e';
 				je ReLoop;
-				jmp UIClothChoice; // if leter not found
-
+				jmp IUClothChoice; // if leter not found
 			IUComputeCotten:
 				mov ebx, 0;
 				jmp IUColorChoice;
@@ -194,33 +162,31 @@ void multidimarray() {
 				jmp IUColorChoice;
 			IUComputeCPN:
 				mov ebx, 16;
-			
+	;//--vvvv-- Get Color input --vvvv--
 			IUColorChoice:
 				call color; // Color choice menu
-				cmp colorChoice, 'a';
+				call getInput;
+				cmp UserChoice, 'a';
 				jge IULowerCase;
-
-				cmp colorChoice, 'R';
+				cmp UserChoice, 'R';
 				je IUComputeRed;
-				cmp colorChoice, 'G';
+				cmp UserChoice, 'G';
 				je IUComputeGreen;
-				cmp colorChoice, 'B';
+				cmp UserChoice, 'B';
 				je IUComputeBlue;
-				cmp colorChoice, 'E';
+				cmp UserChoice, 'E';
 				je ReLoop;
 				jmp IUColorChoice // if leter not found
-
 			IULowerCase:
-				cmp colorChoice, 'r';
+				cmp UserChoice, 'r';
 				je IUComputeRed;
-				cmp colorChoice, 'g';
+				cmp UserChoice, 'g';
 				je IUComputeGreen;
-				cmp colorChoice, 'b';
+				cmp UserChoice, 'b';
 				je IUComputeBlue;
-				cmp colorChoice, 'e';
+				cmp UserChoice, 'e';
 				je ReLoop;
 				jmp IUColorChoice // if leter not found
-			
 			IUComputeRed:
 				add ebx, 0;
 				jmp IUSizeChoice;
@@ -229,38 +195,35 @@ void multidimarray() {
 				jmp IUSizeChoice;
 			IUComputeBlue:
 				add ebx, 160;
-
-			
+	;//--vvvv-- Get size input --vvvv--
 			IUSizeChoice:
 				call sizeGet; // Size choice menu
-				cmp sizeChoice, 'a';
+				call getInput;
+				cmp UserChoice, 'a';
 				jge IULowerCaseSize;
-
-				cmp sizeChoice, 'S';
+				cmp UserChoice, 'S';
 				je IUComputeSmall;
-				cmp sizeChoice, 'M';
+				cmp UserChoice, 'M';
 				je IUComputeMedium;
-				cmp sizeChoice, 'L';
+				cmp UserChoice, 'L';
 				je IUComputeLarge;
-				cmp sizeChoice, 'X';
+				cmp UserChoice, 'X';
 				je IUComputeXL;
-				cmp sizeChoice, 'E';
+				cmp UserChoice, 'E';
 				je ReLoop;
 				jmp IUSizeChoice // if leter not found
-
 			IULowerCaseSize:
-				cmp sizeChoice, 's';
+				cmp UserChoice, 's';
 				je IUComputeSmall;
-				cmp sizeChoice, 'm';
+				cmp UserChoice, 'm';
 				je IUComputeMedium;
-				cmp sizeChoice, 'l';
+				cmp UserChoice, 'l';
 				je IUComputeLarge;
-				cmp sizeChoice, 'x';
+				cmp UserChoice, 'x';
 				je IUComputeXL;
-				cmp sizeChoice, 'e';
+				cmp UserChoice, 'e';
 				je ReLoop;
 				jmp IUSizeChoice // if leter not found
-			
 			IUComputeSmall:
 				add ebx, 0;
 				jmp IUpdate;
@@ -277,8 +240,6 @@ void multidimarray() {
 				mov eax, howMany
 				add [shirtStock + ebx], eax
 			jmp Reloop; // Dipsplay the main menu
-	;
-	;// --^^^^-- End of Inventory Update logic --^^^^--
 	;
 	;//--vvvv-- Calculates all shirts in stock --vvvv--
 	;
@@ -298,46 +259,42 @@ void multidimarray() {
 				call DisplayTotal;
 			jmp ReLoop;
 	;
-	;// --^^^^-- End of Calculation --^^^^--
-	;
 	;//--vvvv-- Calculate # of shirts based on cloth type --vvvv--
 	;
 		PickCloth:
 			call clothMenu;
 			call cloth;
+			call getInput;
 			mov total, 0;
-			cmp clothChoice, 'a';
-			jge LowerCaseCloth;
-
-			cmp clothChoice, 'C';
-			je ComputeCotten;
-			cmp clothChoice, 'P';
-			je ComputePolly;
-			cmp clothChoice, 'B';
-			je ComputeCP;
-			cmp clothChoice, 'N';
-			je ComputeNylon;
-			cmp clothChoice, 'O';
-			je ComputeCPN;
-			cmp clothChoice, 'E';
-			je ReLoop;
-			jmp PickCloth;
-
-			LowerCaseCloth:
-				cmp clothChoice, 'c';
+			cmp UserChoice, 'a';
+				jge LowerCaseCloth;
+			cmp UserChoice, 'C';
 				je ComputeCotten;
-				cmp clothChoice, 'p';
+			cmp UserChoice, 'P';
 				je ComputePolly;
-				cmp clothChoice, 'b';
+			cmp UserChoice, 'B';
 				je ComputeCP;
-				cmp clothChoice, 'n';
+			cmp UserChoice, 'N';
 				je ComputeNylon;
-				cmp clothChoice, 'o';
+			cmp UserChoice, 'O';
 				je ComputeCPN;
-				cmp clothChoice, 'e';
+			cmp UserChoice, 'E';
 				je ReLoop;
+			jmp PickCloth;
+			LowerCaseCloth:
+				cmp UserChoice, 'c';
+					je ComputeCotten;
+				cmp UserChoice, 'p';
+					je ComputePolly;
+				cmp UserChoice, 'b';
+					je ComputeCP;
+				cmp UserChoice, 'n';
+					je ComputeNylon;
+				cmp UserChoice, 'o';
+					je ComputeCPN;
+				cmp UserChoice, 'e';
+					je ReLoop;
 				jmp PickCloth;
-				
 			ComputeCotten:
 				mov ebx, 0;
 				jmp ComputeCloth;
@@ -365,40 +322,36 @@ void multidimarray() {
 				jmp ClothDoLoop;
 			endClothDoLoop:
 				mov total, ecx;
-				call DisplayTotalCloth;
+				call DisplayIndividualTotal;
 			jmp PickCloth; 
-	;
-	;// --^^^^-- End of Calculation --^^^^--
 	;
 	;//--vvvv-- Calculate # of shirts based on COLOR type --vvvv--
 	;
 		PickColor:
 			call colorMenu;
 			call color;
-			cmp colorChoice, 'a';
-			jge LowerCase;
-			
-			cmp colorChoice, 'R';
-			je ComputeRed;
-			cmp colorChoice, 'G';
-			je ComputeGreen;
-			cmp colorChoice, 'B';
-			je ComputeBlue;
-			cmp colorChoice, 'E';
-			je ReLoop;
-			jmp PickColor;
-			
-			LowerCase:
-				cmp colorChoice, 'r';
+			call getInput;
+				cmp UserChoice, 'a';
+				jge LowerCase;
+				cmp UserChoice, 'R';
 				je ComputeRed;
-				cmp colorChoice, 'g';
+				cmp UserChoice, 'G';
 				je ComputeGreen;
-				cmp colorChoice, 'b';
+				cmp UserChoice, 'B';
 				je ComputeBlue;
-				cmp colorChoice, 'e';
+				cmp UserChoice, 'E';
+				je ReLoop;
+			jmp PickColor;
+			LowerCase:
+				cmp UserChoice, 'r';
+				je ComputeRed;
+				cmp UserChoice, 'g';
+				je ComputeGreen;
+				cmp UserChoice, 'b';
+				je ComputeBlue;
+				cmp UserChoice, 'e';
 				je ReLoop;
 				jmp PickColor;
-
 			ComputeRed:
 				mov ebx, 0;	// Location of the first Red shirt
 				jmp ComputeColor;
@@ -408,7 +361,6 @@ void multidimarray() {
 			ComputeBlue:
 				mov ebx, 40; // Location of the first Blue shirt
 				jmp ComputeColor;
-
 			ComputeColor:
 				mov ecx, 0;
 				mov I, 0;
@@ -421,45 +373,41 @@ void multidimarray() {
 				jmp ColorLoop;
 			endColorLoop:
 				mov total, ecx;
-				call DisplayTotalColor;
+				call DisplayIndividualTotal;
 			jmp PickColor;
-	;
-	;// --^^^^-- End of Calculation --^^^^--
 	;
 	;//--vvvv-- Calculate # of shirts based on SIZE --vvvv--
 	;
 		PickSize:
 			call sizeMenu;
 			call sizeGet;
+			call getInput;
 			mov total, 0;
-			cmp sizeChoice, 'a';
+			cmp UserChoice, 'a';
 			jge LowerCaseSize;
-
-			cmp sizeChoice, 'S';
-			je ComputeSmall;
-			cmp sizeChoice, 'M';
-			je ComputeMedium;
-			cmp sizeChoice, 'L';
-			je ComputeLarge;
-			cmp sizeChoice, 'X';
-			je ComputeXL;
-			cmp sizeChoice, 'E';
-			je ReLoop;
-			jmp PickSize;
-
-			LowerCaseSize:
-				cmp sizeChoice, 's';
+				cmp UserChoice, 'S';
 				je ComputeSmall;
-				cmp sizeChoice, 'm';
+				cmp UserChoice, 'M';
 				je ComputeMedium;
-				cmp sizeChoice, 'l';
+				cmp UserChoice, 'L';
 				je ComputeLarge;
-				cmp sizeChoice, 'x';
+				cmp UserChoice, 'X';
 				je ComputeXL;
-				cmp sizeChoice, 'e';
+				cmp UserChoice, 'E';
+				je ReLoop;
+			jmp PickSize;
+			LowerCaseSize:
+				cmp UserChoice, 's';
+				je ComputeSmall;
+				cmp UserChoice, 'm';
+				je ComputeMedium;
+				cmp UserChoice, 'l';
+				je ComputeLarge;
+				cmp UserChoice, 'x';
+				je ComputeXL;
+				cmp UserChoice, 'e';
 				je ReLoop;
 				jmp PickSize;
-
 			ComputeSmall:
 				mov ebx, 0;
 				jmp ComputeSize;
@@ -471,7 +419,6 @@ void multidimarray() {
 				jmp ComputeSize;
 			ComputeXL:
 				mov ebx, 60;
-
 			ComputeSize:
 				mov ecx, 0;
 				mov I, 0;
@@ -491,11 +438,67 @@ void multidimarray() {
 				jmp SizeLoop;
 			endSizeLoop:
 				mov total, ecx;
-				call DisplayTotalSize;
+				call DisplayIndividualTotal;
 			jmp PickSize;
-
 		ReLoop:
 			jmp MainLoop;
 	End:
 	}
 }
+/*--------------------------------Output-----------------------------------------
+--------------- Shirt Shop -----------------
+	1. Update Inventory
+	2. Total Items in Inventory
+	3. Pick a cloth type to list
+	4. Pick a color to list
+	5. Pick a size to list
+	0. Exit
+Enter a number: 1
+--------------- Update Inventory -----------------
+	C. Cotton
+	P. Polyester
+	B. Cotton Poly Blend
+	N. Nylon
+	O. Full Blend
+	E. Return to Main Menu
+Enter a letter: B
+	R. Red
+	G. Green
+	B. Blue
+	E. Return to Main Menu
+Enter a letter: G
+	S. Small
+	M. Medium
+	L. Large
+	X. Extra Large
+	E. Return to Main Menu
+Enter a letter: l
+Enter a number (-### to subtract): 32
+--------------- Cloth Menu -----------------
+	C. Cotton
+	P. Polyester
+	B. Cotton Poly Blend
+	N. Nylon
+	O. Full Blend
+	E. Return to Main Menu
+Enter a letter: B
+There are 44 B shirts in stock.
+Press any key to continue . . .
+--------------- Color Menu -----------------
+	R. Red
+	G. Green
+	B. Blue
+	E. Return to Main Menu
+Enter a letter: B
+There are 20 B shirts in stock.
+Press any key to continue . . .
+--------------- Size Menu -----------------
+	S. Small
+	M. Medium
+	L. Large
+	X. Extra Large
+	E. Return to Main Menu
+Enter a letter: L
+There are 47 L shirts in stock.
+Press any key to continue . . .
+-------------------------------------------------------------------------------*/

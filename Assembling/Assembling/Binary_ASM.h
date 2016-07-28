@@ -7,7 +7,7 @@
 //		Professor	Ray Ahmadnia
 //
 //   This program displays:
-//		Int into Binary using C++ and some Assembly
+//		Int Base10 into another Base using C++ and some Assembly
 //----------------------------------------------------------
 using namespace std;
 void Print1() {
@@ -58,8 +58,10 @@ void binary_asm() {
 	cout << "---------- Bianary ---------\n\n";
 	cout << "\tOutput in bianary using bitwise opperators:\n\n";
 	unsigned int a;
+	short b;
 	do {
 		cout << "Enter a positive integer or 0 to exit: "; cin >> a;
+		cout << "Enter a Base to convert to: "; cin >> b;
 		if (a != 0) intBase(a);
 	} while (a != 0);
 

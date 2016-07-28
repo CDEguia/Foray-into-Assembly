@@ -7,7 +7,7 @@
 //		Professor	Ray Ahmadnia
 //
 //   This program displays:
-//		Int into Binary using C++
+//		Int base10 into other using C++
 //----------------------------------------------------------
 using namespace std;
 
